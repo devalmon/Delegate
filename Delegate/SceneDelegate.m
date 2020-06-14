@@ -7,6 +7,9 @@
 //
 
 #import "SceneDelegate.h"
+#import "ViewController.h"
+#import "Doctor.h"
+#import "Patient.h"
 
 @interface SceneDelegate ()
 
@@ -19,6 +22,40 @@
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+
+    self.window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene *) scene];
+    self.window.backgroundColor = [UIColor systemRedColor];
+    ViewController *rootViewController = ViewController.new;
+//    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+    self.window.rootViewController = rootViewController;
+    [self.window makeKeyAndVisible];
+    
+    Patient *patient1 = Patient.new;
+    Patient *patient2 = Patient.new;
+    Patient *patient3 = Patient.new;
+    Patient *patient4 = Patient.new;
+    
+    patient1.name = @"Vova";
+    patient2.name = @"Petya";
+    patient3.name = @"Vasya";
+    patient4.name = @"Max";
+    
+    patient1.temperature = 36.6f;
+    patient2.temperature = 40.2f;
+    patient3.temperature = 37.0f;
+    patient4.temperature = 38.0f;
+    
+    Doctor *doctor1 = Doctor.new;
+    
+    patient1.delegate = doctor1;
+    patient2.delegate = doctor1;
+    patient3.delegate = doctor1;
+    patient4.delegate = doctor1;
+    
+    NSLog(@"%@ are you ok? %s", patient1.name, [patient1 howAreYou] ? "Yes" : "No");
+    NSLog(@"%@ are you ok? %s", patient2.name, [patient2 howAreYou] ? "Yes" : "No");
+    NSLog(@"%@ are you ok? %s", patient3.name, [patient3 howAreYou] ? "Yes" : "No");
+    NSLog(@"%@ are you ok? %s", patient4.name, [patient4 howAreYou] ? "Yes" : "No");
 }
 
 
